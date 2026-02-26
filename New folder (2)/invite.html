@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Iftar Party Invite</title>
+
+<style>
+body{
+    font-family: Arial;
+    text-align:center;
+    background: linear-gradient(45deg,#ff9a9e,#fad0c4);
+    overflow:hidden;
+}
+
+.container{
+    margin-top:100px;
+}
+
+h2{
+    animation: fadeIn 1s ease-in-out;
+}
+
+button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:25px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.yes{
+    background:#4CAF50;
+    color:white;
+}
+
+.no{
+    background:#f44336;
+    color:white;
+}
+
+button:hover{
+    transform:scale(1.2);
+}
+
+#opinionBox{
+    display:none;
+    margin-top:20px;
+}
+
+textarea{
+    padding:10px;
+    border-radius:10px;
+    width:250px;
+    height:70px;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(-20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2 id="question">
+        13th March Ashraf Sir er Iftar party, jano to?
+    </h2>
+
+    <div id="buttons">
+        <button class="yes" onclick="answer('yes1')">Yes</button>
+        <button class="no" onclick="answer('no1')">No</button>
+    </div>
+
+    <div id="opinionBox">
+        <p>Kn asba nah?</p>
+        <textarea id="opinion"></textarea><br><br>
+        <button onclick="saveOpinion()">Submit</button>
+    </div>
+
+    <div id="result"></div>
+</div>
+
+<script>
+
+let answers = [];
+
+function answer(type){
+
+    if(type == 'yes1'){
+        document.getElementById("question").innerHTML =
+        "Tmi zabae, party te?";
+        answers.push("First Question: Yes");
+    }
+
+    if(type == 'no1'){
+        document.getElementById("question").innerHTML =
+        "Tahole zene nao, 13th March e Ashraf Sir iftar party korbe. Tumi asbe party te?";
+        answers.push("First Question: No");
+    }
+
+    document.getElementById("buttons").innerHTML =
+    `<button class="yes" onclick="answer('yes2')">Yes</button>
+     <button class="no" onclick="answer('no2')">No</button>`;
+}
+
+function answer(type){
+
+    if(type == 'yes2'){
+        document.getElementById("question").innerHTML =
+        "Okh, chole aso 😍";
+        answers.push("Final Answer: Yes");
+        showResults();
+    }
+
+    if(type == 'no2'){
+        document.getElementById("question").innerHTML =
+        "Kn asba nah?";
+        answers.push("Final Answer: No");
+        document.getElementById("buttons").style.display="none";
+        document.getElementById("opinionBox").style.display="block";
+    }
+}
+
+function saveOpinion(){
+    let opinion = document.getElementById("opinion").value;
+    answers.push("Opinion: " + opinion);
+    showResults();
+}
+
+function showResults(){
+    document.getElementById("result").innerHTML =
+    "<h3>Collected Answers:</h3>" + answers.join("<br>");
+}
+
+</script>
+
+</body>
+</html>
